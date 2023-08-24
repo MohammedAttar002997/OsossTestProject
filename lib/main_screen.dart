@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ososstestapp/animation_page/animation_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final TextEditingController _name = TextEditingController();
+  final double spaceValue = 12.0;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,9 @@ class _MainScreenState extends State<MainScreen> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 12.0,),
+            SizedBox(
+              height: spaceValue,
+            ),
             TextFormField(
               controller: _name,
               decoration: InputDecoration(
@@ -49,8 +53,8 @@ class _MainScreenState extends State<MainScreen> {
                 });
               },
             ),
-            const SizedBox(
-              height: 10.0,
+            SizedBox(
+              height: spaceValue,
             ),
             const Spacer(),
             Column(
@@ -64,8 +68,8 @@ class _MainScreenState extends State<MainScreen> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const SizedBox(
-                  height: 10.0,
+                SizedBox(
+                  height: spaceValue,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -91,7 +95,18 @@ class _MainScreenState extends State<MainScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return AnimationsPage(
+                                name: _name.text,
+                              );
+                            },
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         // side: BorderSide(color: Colors.yellow, width: 5),
                         textStyle: const TextStyle(
@@ -113,8 +128,10 @@ class _MainScreenState extends State<MainScreen> {
                             fontSize: 18,
                             fontStyle: FontStyle.normal),
                         shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                        ),
                       ),
                       child: const Text("Pokemon Screen"),
                     ),

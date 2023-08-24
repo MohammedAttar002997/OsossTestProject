@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ososstestapp/animation_page/animation_screen.dart';
+import 'package:ososstestapp/pokemon_page/presentation/screens/pokemon_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -80,7 +81,10 @@ class _MainScreenState extends State<MainScreen> {
                         fontSize: 20,
                         fontStyle: FontStyle.normal),
                     shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(12))),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
                   ),
                   onPressed: () {
                     setState(() {
@@ -114,13 +118,24 @@ class _MainScreenState extends State<MainScreen> {
                             fontSize: 18,
                             fontStyle: FontStyle.normal),
                         shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                        ),
                       ),
                       child: const Text("Animation Screen"),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const PokemonScreen();
+                            },
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         // side: BorderSide(color: Colors.yellow, width: 5),
                         textStyle: const TextStyle(

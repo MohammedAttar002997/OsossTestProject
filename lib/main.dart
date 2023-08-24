@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ososstestapp/main_screen.dart';
 
 void main() {
   runApp(const OsossTestApp());
@@ -14,15 +15,8 @@ class OsossTestApp extends StatefulWidget {
 class _OsossTestAppState extends State<OsossTestApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Dialog"),
-        ),
-        body: const Column(
-          children: [],
-        ),
-      ),
+    return const MaterialApp(
+      home: MainScreen(),
     );
   }
 }

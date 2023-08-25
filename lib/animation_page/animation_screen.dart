@@ -9,10 +9,10 @@ class AnimationsPage extends StatefulWidget {
   });
 
   @override
-  _AnimationsPageState createState() => _AnimationsPageState();
+  AnimationsPageState createState() => AnimationsPageState();
 }
 
-class _AnimationsPageState extends State<AnimationsPage> {
+class AnimationsPageState extends State<AnimationsPage> {
   double _width = 300;
   double _height = 300;
   Color _color = Colors.green;
@@ -23,7 +23,7 @@ class _AnimationsPageState extends State<AnimationsPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Animations'),
+        title: const Text('Animations Page'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -31,11 +31,13 @@ class _AnimationsPageState extends State<AnimationsPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              widget.name,
+              widget.name == ""
+                  ? "Hello, sorry no text available for now"
+                  : widget.name,
               style: const TextStyle(
                 color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontSize: 25,
+                fontWeight: FontWeight.w500,
+                fontSize: 22,
               ),
             ),
             const Spacer(),
@@ -58,15 +60,25 @@ class _AnimationsPageState extends State<AnimationsPage> {
               children: [
                 InkWell(
                   onTap: () {
-                    setState(() {
-                      _width = 250;
-                      _height = 250;
-                      _color = Colors.redAccent;
-                      _borderRadius = BorderRadius.circular(150);
-                      // _boxShape = BoxShape.circle;
-                    });
+                    setState(
+                      () {
+                        _width = 250;
+                        _height = 250;
+                        _color = Colors.redAccent;
+                        _borderRadius = BorderRadius.circular(150);
+                        // _boxShape = BoxShape.circle;
+                      },
+                    );
                   },
-                  child: Container(
+                  child:
+                      // ShapeButtonWidget(
+                      //   height: 90,
+                      //   width: 90,
+                      //   shapeColor: Colors.redAccent,
+                      //   boxShape: BoxShape.circle,
+                      // ),
+
+                      Container(
                     height: 90,
                     width: 90,
                     decoration: const BoxDecoration(

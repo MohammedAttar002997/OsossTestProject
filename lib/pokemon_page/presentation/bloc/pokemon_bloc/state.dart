@@ -17,5 +17,5 @@ class PokemonErrorState extends PokemonState {}
 class PokemonLoadedState extends PokemonState {
   final PokemonEntity? pokemonEntity;
 
-  PokemonLoadedState({this.pokemonEntity});
+  const PokemonLoadedState({this.pokemonEntity});
 }

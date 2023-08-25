@@ -24,10 +24,10 @@ class PokemonRepositoryImpl implements PokemonRepository {
   Future<Either<Failure, PokemonEntity>> getPokemonInfo() async {
     try {
       if (await networkInfo.isConnected) {
-        final PokemonData =
+        final pokemonData =
         await pokemonRemoteDataSource!.getPokemonData();
-        if (PokemonData.results != null) {
-          return Right(PokemonData);
+        if (pokemonData.results != null) {
+          return Right(pokemonData);
         } else {
           return Left(ServerFailure());
         }

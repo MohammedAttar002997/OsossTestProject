@@ -16,7 +16,7 @@ class ValidationException implements Exception {}
 
 class SocketException implements Exception {}
 
-Exception testExceptionGlobal(DioError dioError) {
+Exception testExceptionGlobal(DioException dioError) {
   switch (dioError.type) {
     case DioExceptionType.sendTimeout:
       throw TimeoutException();

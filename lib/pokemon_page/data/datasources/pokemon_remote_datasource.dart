@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ososstestapp/core/appconst.dart';
-import 'package:ososstestapp/core/response_type.dart' as ResType;
+import 'package:ososstestapp/core/response_type.dart' as res_type;
 import '../../../core/exceptions/exceptions.dart';
 import '../models/pokemon_model.dart';
 
@@ -16,14 +16,14 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
   @override
   Future<PokemonModel> getPokemonData() async {
     try {
-      Response response = await dio!.get("${AppConst.BaseUrl}pokemon",
+      Response response = await dio!.get("${AppConst.baseUrl}pokemon",
           options: Options(
               followRedirects: false,
               validateStatus: (status) {
                 return status! < 500;
               }));
       return _toPokemonModel(response: response);
-    } on DioError catch (errorType) {
+    } on DioException catch (errorType) {
       throw testExceptionGlobal(errorType);
     }
   }
@@ -34,19 +34,19 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
       serverResponse = PokemonModel.fromJson(response.data);
       switch (response.statusCode) {
         case 200:
-          serverResponse.responseType = ResType.ResponseType.SUCCESS;
+          serverResponse.responseType = res_type.ResponseType.SUCCESS;
           break;
         case 400:
         case 401:
         case 403:
-          serverResponse.responseType = ResType.ResponseType.VALIDATION_ERROR;
+          serverResponse.responseType = res_type.ResponseType.VALIDATION_ERROR;
           throw ValidationException();
         case 500:
-          serverResponse.responseType = ResType.ResponseType.SERVER_ERROR;
+          serverResponse.responseType = res_type.ResponseType.SERVER_ERROR;
           throw ServerException();
       }
     } else {
-      serverResponse.responseType = ResType.ResponseType.CLIENT_ERROR;
+      serverResponse.responseType = res_type.ResponseType.CLIENT_ERROR;
       throw UnHandledException();
     }
     return serverResponse;

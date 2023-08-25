@@ -53,7 +53,7 @@ Future<void> init() async {
 
 Dio getNetworkObj() {
   BaseOptions options = BaseOptions(
-    baseUrl: AppConst.BaseUrl,
+    baseUrl: AppConst.baseUrl,
     connectTimeout: const Duration(milliseconds: 30000),
     receiveTimeout: const Duration(milliseconds: 30000),
   );

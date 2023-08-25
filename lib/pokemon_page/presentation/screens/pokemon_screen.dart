@@ -25,46 +25,65 @@ class _PokemonScreenState extends State<PokemonScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => pokemonBloc!,
-      child: BlocBuilder<PokemonBloc, PokemonState>(
-        builder: (context, state) {
-          if (state is PokemonLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is PokemonLoadedState) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text("Pokemon page"),
-                centerTitle: true,
-              ),
-              body: ListView.builder(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Pokemon page"),
+        centerTitle: true,
+      ),
+      body: BlocProvider(
+        create: (context) => pokemonBloc!,
+        child: BlocBuilder<PokemonBloc, PokemonState>(
+          builder: (context, state) {
+            if (state is PokemonLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is PokemonLoadedState) {
+              return ListView.builder(
+                padding: const EdgeInsets.all(8.0),
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(state.pokemonEntity!.results![index].name!),
-                    style: ListTileStyle.list,
-                    contentPadding: const EdgeInsets.all(5.0),
-                    leading: Placeholder(
-                      child: Image.asset(
-                        "images/pokemon.png",
-                        fit: BoxFit.cover,
-                        width: 100.0,
-                        height: 100.0,
-                      ),
+                  return Card(
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    margin: const EdgeInsets.symmetric(vertical: 7),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          "images/pokemon_go.jpg",
+                          fit: BoxFit.cover,
+                          width: 100,
+                          height: 100,
+                        ),
+                        const SizedBox(
+                          width: 12.0,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.pokemonEntity!.results![index].name!,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    subtitle: Text(state.pokemonEntity!.results![index].url!),
                   );
                 },
                 itemCount: state.pokemonEntity!.results!.length,
-              ),
-            );
-          } else {
-            return Container(
-              color: Colors.blue,
-            );
-          }
-        },
+              );
+            } else {
+              return Container(
+                color: Colors.blue,
+              );
+            }
+          },
+        ),
       ),
     );
   }
